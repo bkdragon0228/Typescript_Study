@@ -1,8 +1,19 @@
-// any는 어떤 타입이든 들어올 수 있다.
-let todoItems: { id: number; title: string; done: boolean }[]; // 이게 포인트!
+// type Todo = {
+//   id: number;
+//   title: string;
+//   done: boolean;
+// }; // 타입 설정
+
+interface Todo {
+  id: number;
+  title: string;
+  done: boolean;
+}
+
+let todoItems: Todo[];
 
 // api
-function fetchTodoItems(): { id: number; title: string; done: boolean }[] {
+function fetchTodoItems(): Todo[] {
   const todos = [
     { id: 1, title: '안녕', done: false },
     { id: 2, title: '타입', done: false },
@@ -17,7 +28,7 @@ function fetchTodos(): Array<object> {
   return todos;
 }
 
-function addTodo(todo: { id: number; title: string; done: boolean }): void {
+function addTodo(todo: Todo): void {
   // 반환값이 없음을 지정
   todoItems.push(todo);
 }
@@ -26,10 +37,7 @@ function deleteTodo(index: number): void {
   todoItems.splice(index, 1);
 }
 
-function completeTodo(
-  index: number,
-  todo: { id: number; title: string; done: boolean }
-): void {
+function completeTodo(index: number, todo: Todo): void {
   todo.done = true;
   todoItems.splice(index, 1, todo);
 }
