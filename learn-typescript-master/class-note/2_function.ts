@@ -12,7 +12,6 @@ function add(): number {
     return 10;
 }
 
-
 // 합친 버전(기본)
 function sol(a: number, b: number): number {
     return a + b;
@@ -22,7 +21,9 @@ function sol(a: number, b: number): number {
 
 // 옵셔널 파라미터 - 선택적 파라미터
 // 특정 파라미터를 선택적으로 사용하고 싶을 때
-function log(a: string, b?: number) {
+function log(a: string, b?: number): void {
+    console.log(a);
+    console.log(b);
 }
 
 log('hello world');
