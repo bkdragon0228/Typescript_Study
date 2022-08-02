@@ -19,3 +19,11 @@ function sol(a: number, b: number): number {
 }
 
 // sol(10,20, 30, 40); // '2개의 인수가 필요한데 4개를 넣었다' 고 알려줌
+
+// 옵셔널 파라미터 - 선택적 파라미터
+// 특정 파라미터를 선택적으로 사용하고 싶을 때
+function log(a: string, b?: number) {
+}
+
+log('hello world');
+log('hello ts', 100);
