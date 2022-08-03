@@ -25,7 +25,9 @@ const numberOfProducts: DropdownItem<number>[] = [
 ];
 
 // item의 타입이 다를 수 있음 두개다 수용할 수 있게해야 한다.
-function createDropdownItem<T>(item: DropdownItem<T>) {
+
+// 제네릭의 타입을 문자와 숫자만 받을 수 있도록 유니온 타입으로 제한
+function createDropdownItem<T extends string | number>(item: DropdownItem<T>) {
     const option = document.createElement('option');
     option.value = item.value.toString();
     option.innerText = item.value.toString();

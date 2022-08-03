@@ -41,3 +41,33 @@ const obj: Dropdown<number> = {
     value: 10,
     selected: false,
 };
+
+// 제네릭 타입 제한
+// function logTextLength<T extends string>(text: T) {
+//     let length = text.length;
+//     return length;
+// }
+
+interface LengthType {
+    length: number;
+}
+
+function logTextLength<T extends LengthType>(text: T) {
+    const length = text.length;
+
+    return length;
+}
+
+logTextLength('abc'); // length가 있는 타입이라 가능
+
+// 제네릭 타입 제한 - keyof
+interface ShoppingItem {
+    name: string;
+    price: number;
+    stock: number;
+}
+
+// ShoppingItem의 키 값들만 들어갈 수 있다.
+function getShoppingItemOption<T extends keyof ShoppingItem>(itemOption: T) {
+    return itemOption;
+}
