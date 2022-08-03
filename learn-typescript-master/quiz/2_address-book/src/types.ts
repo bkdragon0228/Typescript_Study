@@ -17,3 +17,5 @@ export enum PhoneType {
   Office = 'office',
   studio = 'studio',
 }
+
+// export { Contact, PhoneType };
