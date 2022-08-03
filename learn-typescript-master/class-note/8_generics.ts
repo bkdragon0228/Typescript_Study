@@ -29,3 +29,15 @@ const num = sayText(10);
 
 logText<string>('a');
 logText<number>(10);
+
+// 인터페이스에 제네릭 선언하는 방법
+
+interface Dropdown<T> {
+    value: T;
+    selected: boolean;
+}
+
+const obj: Dropdown<number> = {
+    value: 10,
+    selected: false,
+};
