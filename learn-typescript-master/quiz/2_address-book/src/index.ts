@@ -12,6 +12,11 @@ interface Contact {
   phones: PhoneNumberDictionary;
 }
 
+enum PhoneType {
+  Home = 'home',
+  Office = 'office',
+  studio = 'studio',
+}
 // api를 모방
 // TODO: 아래 함수의 반환 타입을 지정해보세요.
 // Promise<unknown>을 해결해야한다.
@@ -83,7 +88,9 @@ class AddressBook {
     return this.contacts.filter(contact => contact.address === address);
   }
 
-  findContactByPhone(phoneNumber: number, phoneType: string): Contact[] {
+  // phoneType : home, office, studio => 이것들로만 제한하기 위해 enum으로 적용
+  // 제한된 문자열만 인자로 넣을 수 있게
+  findContactByPhone(phoneNumber: number, phoneType: PhoneType): Contact[] {
     return this.contacts.filter(
       contact => contact.phones[phoneType].num === phoneNumber
     );
