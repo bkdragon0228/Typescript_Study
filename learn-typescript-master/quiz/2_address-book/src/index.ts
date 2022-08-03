@@ -1,22 +1,5 @@
-// 전화번호
-interface PhoneNumberDictionary {
-  [phone: string]: {
-    num: number;
-  };
-}
+import { Contact, PhoneType } from './types';
 
-// 전화 번호부
-interface Contact {
-  name: string;
-  address: string;
-  phones: PhoneNumberDictionary;
-}
-
-enum PhoneType {
-  Home = 'home',
-  Office = 'office',
-  studio = 'studio',
-}
 // api를 모방
 // TODO: 아래 함수의 반환 타입을 지정해보세요.
 // Promise<unknown>을 해결해야한다.
