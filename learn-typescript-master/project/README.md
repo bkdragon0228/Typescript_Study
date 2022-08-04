@@ -15,6 +15,7 @@
 
 2. 명시적인 'any' 선언하기
     - [x] 'tsconfit.json' 파일에 'noImplicitAny' 값을 'true'로 추가
+    - [x] 가능한 타입을 적용할 수 있는 모든 곳에 타입을 적용한다.
 
 ## 참고 자료
 
