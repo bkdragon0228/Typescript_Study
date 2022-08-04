@@ -1,5 +1,5 @@
 // 라이브러리
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Chart } from 'chart.js';
 
 // utils
@@ -42,12 +42,21 @@ function createSpinnerElement(id: string) {
 let isDeathLoading = false;
 const isRecoveredLoading = false;
 
+interface CovidSummaryResponse {
+    Countries: any[];
+    Date: string;
+    Global: object;
+    ID: string;
+    Message: string;
+}
+
 // api
-function fetchCovidSummary() {
+function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
     // 요약 정보
     const url = 'https://api.covid19api.com/summary';
-    return axios.get(url);
+    return axios.get(url); // 형태가 궁금하면 개발자 도구 네트워크 패널을 통해 확인 가능하다.
 }
+fetchCovidSummary().then(res => res.data.Countries); //사용할 수 있는 옵션이 다  나온다.
 
 enum CovidStatus {
     Confirmed = 'confirmed',
