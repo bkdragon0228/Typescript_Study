@@ -2,6 +2,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { Chart } from 'chart.js';
 
+// 변수, 함수 임포트
+import { CovidSummaryResponse, CovidStatus } from './covid/index';
+
 // utils
 function $(selector: string) {
     // dom을 가져오는 함수, selector는 html 요소
@@ -42,14 +45,6 @@ function createSpinnerElement(id: string) {
 let isDeathLoading = false;
 const isRecoveredLoading = false;
 
-interface CovidSummaryResponse {
-    Countries: any[];
-    Date: string;
-    Global: object;
-    ID: string;
-    Message: string;
-}
-
 // api
 function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
     // 요약 정보
@@ -57,12 +52,6 @@ function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
     return axios.get(url); // 형태가 궁금하면 개발자 도구 네트워크 패널을 통해 확인 가능하다.
 }
 fetchCovidSummary().then(res => res.data.Countries); //사용할 수 있는 옵션이 다  나온다.
-
-enum CovidStatus {
-    Confirmed = 'confirmed',
-    Recovered = 'recovered',
-    Deaths = 'deaths',
-}
 
 function fetchCountryInfo(countryCode: string, status: CovidStatus) {
     // 특정 국가의 코로나 정보
