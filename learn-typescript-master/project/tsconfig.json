@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "target": "ES5",
+        "outDir": "./bulit",
+        "moduleResolution": "Node"
+    },
+    "include": ["./src/**/*"]
+}
