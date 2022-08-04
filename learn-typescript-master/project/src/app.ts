@@ -36,13 +36,20 @@ function createSpinnerElement(id: string) {
 let isDeathLoading = false;
 let isRecoveredLoading = false;
 
-function fetchCovidSummary() {
+// api
+function fetchCovidSummary() { // 요약 정보
     const url = 'https://api.covid19api.com/summary';
     return axios.get(url);
 }
 
-function fetchCountryInfo(countryCode: any, status: any) {
-    // params: confirmed, recovered, deaths
+enum CovidStatus {
+    Confirmed = 'confirmed',
+    Recovered = 'recovered',
+    Deaths = 'deaths'
+}
+
+function fetchCountryInfo(countryCode: string, status: CovidStatus) { // 특정 국가의 코로나 정보
+    // status params: confirmed, recovered, deaths
     const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
     return axios.get(url);
 }
