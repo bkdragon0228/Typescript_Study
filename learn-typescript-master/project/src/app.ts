@@ -3,7 +3,11 @@ import axios, { AxiosResponse } from 'axios';
 import { Chart } from 'chart.js';
 
 // 변수, 함수 임포트
-import { CovidSummaryResponse, CovidStatus } from './covid/index';
+import {
+    CovidSummaryResponse,
+    CovidStatus,
+    CountrySummaryResponse,
+} from './covid/index';
 
 // utils
 function $(selector: string) {
@@ -53,7 +57,10 @@ function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
 }
 fetchCovidSummary().then(res => res.data.Countries); //사용할 수 있는 옵션이 다  나온다.
 
-function fetchCountryInfo(countryCode: string, status: CovidStatus) {
+function fetchCountryInfo(
+    countryCode: string,
+    status: CovidStatus
+): Promise<AxiosResponse<CountrySummaryResponse>> {
     // 특정 국가의 코로나 정보
     // status params: confirmed, recovered, deaths
     const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
