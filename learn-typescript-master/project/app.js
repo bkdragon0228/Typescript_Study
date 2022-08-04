@@ -1,3 +1,5 @@
+// @ts-check
+
 // utils
 function $(selector) {
     return document.querySelector(selector);
@@ -20,7 +22,10 @@ const recoveredSpinner = createSpinnerElement('recovered-spinner');
 function createSpinnerElement(id) {
     const wrapperDiv = document.createElement('div');
     wrapperDiv.setAttribute('id', id);
-    wrapperDiv.setAttribute('class', 'spinner-wrapper flex justify-center align-center');
+    wrapperDiv.setAttribute(
+        'class',
+        'spinner-wrapper flex justify-center align-center'
+    );
     const spinnerDiv = document.createElement('div');
     spinnerDiv.setAttribute('class', 'ripple-spinner');
     spinnerDiv.appendChild(document.createElement('div'));
@@ -33,7 +38,15 @@ function createSpinnerElement(id) {
 let isDeathLoading = false;
 let isRecoveredLoading = false;
 
+/**
+ * @typedef {object} CovidSummary
+ * @property {Array<object>} Country
+ */
+
 // api
+/**
+ * @returns {Promise<CovidSummary>}
+ */
 function fetchCovidSummary() {
     const url = 'https://api.covid19api.com/summary';
     return axios.get(url);
@@ -58,7 +71,10 @@ function initEvents() {
 
 async function handleListClick(event) {
     let selectedId;
-    if (event.target instanceof HTMLParagraphElement || event.target instanceof HTMLSpanElement) {
+    if (
+        event.target instanceof HTMLParagraphElement ||
+        event.target instanceof HTMLSpanElement
+    ) {
         selectedId = event.target.parentElement.id;
     }
     if (event.target instanceof HTMLLIElement) {
@@ -71,9 +87,18 @@ async function handleListClick(event) {
     clearRecoveredList();
     startLoadingAnimation();
     isDeathLoading = true;
-    const { data: deathResponse } = await fetchCountryInfo(selectedId, 'deaths');
-    const { data: recoveredResponse } = await fetchCountryInfo(selectedId, 'recovered');
-    const { data: confirmedResponse } = await fetchCountryInfo(selectedId, 'confirmed');
+    const { data: deathResponse } = await fetchCountryInfo(
+        selectedId,
+        'deaths'
+    );
+    const { data: recoveredResponse } = await fetchCountryInfo(
+        selectedId,
+        'recovered'
+    );
+    const { data: confirmedResponse } = await fetchCountryInfo(
+        selectedId,
+        'confirmed'
+    );
     endLoadingAnimation();
     setDeathsList(deathResponse);
     setTotalDeathsByCountry(deathResponse);
@@ -84,7 +109,9 @@ async function handleListClick(event) {
 }
 
 function setDeathsList(data) {
-    const sorted = data.sort((a, b) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date));
+    const sorted = data.sort(
+        (a, b) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date)
+    );
     sorted.forEach((value) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'list-item-b flex align-center');
@@ -108,7 +135,9 @@ function setTotalDeathsByCountry(data) {
 }
 
 function setRecoveredList(data) {
-    const sorted = data.sort((a, b) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date));
+    const sorted = data.sort(
+        (a, b) => getUnixTimestamp(b.Date) - getUnixTimestamp(a.Date)
+    );
     sorted.forEach((value) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'list-item-b flex align-center');
@@ -173,24 +202,37 @@ function renderChart(data, labels) {
 
 function setChartData(data) {
     const chartData = data.slice(-14).map((value) => value.Cases);
-    const chartLabel = data.slice(-14).map((value) => new Date(value.Date).toLocaleDateString().slice(5, -1));
+    const chartLabel = data
+        .slice(-14)
+        .map((value) => new Date(value.Date).toLocaleDateString().slice(5, -1));
     renderChart(chartData, chartLabel);
 }
 
 function setTotalConfirmedNumber(data) {
-    confirmedTotal.innerText = data.Countries.reduce((total, current) => (total += current.TotalConfirmed), 0);
+    confirmedTotal.innerText = data.Countries.reduce(
+        (total, current) => (total += current.TotalConfirmed),
+        0
+    );
 }
 
 function setTotalDeathsByWorld(data) {
-    deathsTotal.innerText = data.Countries.reduce((total, current) => (total += current.TotalDeaths), 0);
+    deathsTotal.innerText = data.Countries.reduce(
+        (total, current) => (total += current.TotalDeaths),
+        0
+    );
 }
 
 function setTotalRecoveredByWorld(data) {
-    recoveredTotal.innerText = data.Countries.reduce((total, current) => (total += current.TotalRecovered), 0);
+    recoveredTotal.innerText = data.Countries.reduce(
+        (total, current) => (total += current.TotalRecovered),
+        0
+    );
 }
 
 function setCountryRanksByConfirmedCases(data) {
-    const sorted = data.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
+    const sorted = data.Countries.sort(
+        (a, b) => b.TotalConfirmed - a.TotalConfirmed
+    );
     sorted.forEach((value) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'list-item flex align-center');
