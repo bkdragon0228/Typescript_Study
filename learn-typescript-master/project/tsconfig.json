@@ -3,7 +3,9 @@
         "allowJs": true,
         "target": "ES5",
         "outDir": "./bulit",
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+        "lib":["ES2015","DOM","DOM.Iterable"],
+        "noImplicitAny": true, // 명시적 any
     },
     "include": ["./src/**/*"]
 }
