@@ -1,3 +1,7 @@
+// 라이브러리
+import axios from 'axios';
+import { Chart } from 'chart.js';
+
 // utils
 function $(selector: string) {
     // dom을 가져오는 함수, selector는 html 요소
@@ -8,7 +12,7 @@ function getUnixTimestamp(date: Date) {
 }
 
 // DOM
-let a: Element | HTMLElement | HTMLParagraphElement;
+// let a: Element | HTMLElement | HTMLParagraphElement;
 const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
 const deathsTotal = $('.deaths') as HTMLParagraphElement; // 타입 단언
 const recoveredTotal = $('.recovered') as HTMLParagraphElement;
