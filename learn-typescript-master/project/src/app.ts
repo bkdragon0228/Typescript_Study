@@ -1,9 +1,9 @@
 // utils
-function $(selector: any) {
+function $(selector: string) { // dom을 가져오는 함수, selector는 html 요소
     return document.querySelector(selector);
 }
-function getUnixTimestamp(date: any) {
-    return new Date(date).getTime();
+function getUnixTimestamp(date: Date) {
+    return new Date(date).getTime(); // 내장 객체는 마우스 올려보면 타입 추론을 해준다.
 }
 
 // DOM
@@ -17,7 +17,7 @@ const recoveredList = $('.recovered-list');
 const deathSpinner = createSpinnerElement('deaths-spinner');
 const recoveredSpinner = createSpinnerElement('recovered-spinner');
 
-function createSpinnerElement(id: any) {
+function createSpinnerElement(id: string) {
     const wrapperDiv = document.createElement('div');
     wrapperDiv.setAttribute('id', id);
     wrapperDiv.setAttribute(
