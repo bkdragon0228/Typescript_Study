@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "target": "ES5",
-        "outDir": "./bulit",
+        "outDir": "./dist",
         "moduleResolution": "Node",
         "lib":["ES2015","DOM","DOM.Iterable"],
         "noImplicitAny": true, // 명시적 any
