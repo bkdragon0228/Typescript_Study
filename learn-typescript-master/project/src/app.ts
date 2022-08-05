@@ -12,9 +12,9 @@ import {
 } from './covid/index';
 
 // utils
-function $(selector: string) {
-    // dom을 가져오는 함수, selector는 html 요소
-    return document.querySelector(selector);
+function $<T extends HTMLElement = HTMLDivElement>(selector: string) {
+    const element = document.querySelector(selector);
+    return element as T;
 }
 function getUnixTimestamp(date: Date | string | number) {
     return new Date(date).getTime(); // 내장 객체는 마우스 올려보면 타입 추론을 해준다.
@@ -22,13 +22,13 @@ function getUnixTimestamp(date: Date | string | number) {
 
 // DOM
 // let a: Element | HTMLElement | HTMLParagraphElement;
-const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
-const deathsTotal = $('.deaths') as HTMLParagraphElement; // 타입 단언
-const recoveredTotal = $('.recovered') as HTMLParagraphElement;
-const lastUpdatedTime = $('.last-updated-time') as HTMLParagraphElement;
-const rankList = $('.rank-list') as HTMLOListElement;
-const deathsList = $('.deaths-list') as HTMLOListElement;
-const recoveredList = $('.recovered-list') as HTMLOListElement;
+const confirmedTotal = $<HTMLSpanElement>('.confirmed-total');
+const deathsTotal = $<HTMLParagraphElement>('.deaths');
+const recoveredTotal = $<HTMLParagraphElement>('.recovered');
+const lastUpdatedTime = $<HTMLParagraphElement>('.last-updated-time');
+const rankList = $<HTMLOListElement>('.rank-list');
+const deathsList = $<HTMLOListElement>('.deaths-list');
+const recoveredList = $<HTMLOListElement>('.recovered-list');
 const deathSpinner = createSpinnerElement('deaths-spinner');
 const recoveredSpinner = createSpinnerElement('recovered-spinner');
 
@@ -143,7 +143,7 @@ function setDeathsList(data: CountrySummaryResponse) {
         li.appendChild(p);
         //non-null assertion 널이 아니라고 알려주는
         // 주의해서 사용
-        deathsList!.appendChild(li);
+        deathsList.appendChild(li);
     });
 }
 
@@ -216,7 +216,7 @@ function renderChart(data: number[], labels: string[]) {
     const ctx = lineChart.getContext('2d');
     Chart.defaults.color = '#f5eaea';
     Chart.defaults.font.family = 'Exo 2';
-    new Chart(ctx, {
+    new Chart(ctx!, {
         type: 'line',
         data: {
             labels,
