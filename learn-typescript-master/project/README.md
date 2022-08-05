@@ -23,6 +23,8 @@
 4. 외부 라이브러리 모듈화
     - @types/라이브러리 명칭 => 있는 지 확인
 
+5. 'strict' 옵션 추가 후 타입 정의
+
 ## 참고 자료
 
 - [존스 홉킨스 코로나 현황](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
